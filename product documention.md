@@ -151,7 +151,7 @@ recorder20160604163702.mp4 为具体的录制文件，recorder 为固定标识�
 ```
 其中，timestamp 为发送 json 回调任务时间，path 为录制文件具体路径。
 
-### 实时转码
+### 转码
 > 客户需提供需要转码的流、需要匹配的后缀及转码模板。
 
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率、输出流类型等流处理参数。
@@ -201,7 +201,7 @@ recorder20160604163702.mp4 为具体的录制文件，recorder 为固定标识�
 项目地址：https://github.com/upyun/ios-live-sdk  
 反馈及建议：livesdk@upai.com
 
-## Android 推流 SDK
+## 安卓推流 SDK
 ###  系统说明
 * Android 4.1(API 16) 以上
 * 支持ARMv5，ARMv7,ARMv8版本
@@ -246,7 +246,7 @@ recorder20160604163702.mp4 为具体的录制文件，recorder 为固定标识�
 项目地址：https://github.com/upyun/ios-live-sdk  
 反馈及建议：livesdk@upai.com
 
-## Android 播放器 SDK
+## 安卓播放器 SDK
 ###  系统说明
 * Android 2.3 (API 9) 及其以上
 * 支持 ARMv5，ARMv7,ARMv8 版本
