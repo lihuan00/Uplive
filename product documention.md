@@ -93,10 +93,9 @@
 
 ## 高级功能
 
-### Token防盗链 
+### 推流Token防盗链 
 Token 防盗链可以对推流和播放的请求进行校验，可设置签名过期时间来控制流的访问时限。
  
-#### 推流防盗链 
 一个最简的推流地址格式如下：
 ```
 rtmp://push.domain.com/app/stream?domain={domain}&token={token}&expired_ts={expired_ts}
@@ -110,8 +109,8 @@ token: 需计算得出，
 则 token=MD5(push.domain.com/live/stream1465244082a1b2c3d4e53gxwb07)  
 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。
 
-#### 拉流防盗链 
-详细规则见 CDNToken 防盗链规范:http://docs.upyun.com/cdn/feature/#token。
+### 拉流防盗链 
+详细规则见 CDN 防盗链规范：http://docs.upyun.com/cdn/feature/#_1。
 
 
 ## 增值服务
