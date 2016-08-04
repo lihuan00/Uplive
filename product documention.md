@@ -76,14 +76,14 @@
 #### 源站
 该配置项为可访问的网络地址，可以直接填 IP 地址也可以填写域名地址，现不支持多IP 。如果是域名地址，那么 CDN 在回源时会对该域名地址进行 DNS 解析，然后通过解析出来的 IP 地址再进行访问，因此若解析失败也会导致无法正常回源。
 
-### HTTP-FLV 输出
+### HTTP-FLV  
 > 管理后台：服务 > 基础配置 > HTTP-FLV 输出  
 > 源站类型：全部
 
 通过管理后台，可以配置任一播放域名作为 HTTP-FLV 的输出域名。
 
 当推流 url 为 rtmp://push.domain.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.domain.com/app/stream.flv 进行播放。
-### HLS+ 输出
+### HLS 输出
 > 管理后台：服务 > 基础配置 > HLS 输出  
 > 源站类型：全部
 
@@ -93,7 +93,7 @@
 
 ## 高级功能
 
-### 推流Token防盗链 
+### 推流防盗链 
 Token 防盗链可以对推流和播放的请求进行校验，可设置签名过期时间来控制流的访问时限。
  
 一个最简的推流地址格式如下：
@@ -107,11 +107,12 @@ token: 需计算得出，
 计算公式：token = MD5(domain + expire_ts + secret)  ，
 比如 domain = publish.bravo.com，app = live, stream = stream, expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
 则 token=MD5(push.domain.com/live/stream1465244082a1b2c3d4e53gxwb07)  
-注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。
+注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。  
 
-### 拉流防盗链 
-详细规则见 CDN 防盗链规范：http://docs.upyun.com/cdn/feature/#_1。
+> 推流仅支持 token 防盗链  
 
+### 拉流防盗链   
+HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链规范：http://docs.upyun.com/cdn/feature/#_1。
 
 ## 增值服务
 
