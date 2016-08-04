@@ -16,7 +16,7 @@
 
 > 当推流域名填写 push.domain.com ，播放域名填写 play.domain.com ，接入点填写 app ，如果推流 URL 为 
 > rtmp://push.domain.com/app/stream 时，其 rtmp 播放 URL 为 rtmp://play.domain.com/app/stream  
-> 其中，stream 为流名，又称流密钥，app/stream 又称为频道，同一条流推拉流域名不同，但频道名一致。
+> 其中，stream 为流名，又称流密钥，app/stream 又称为频道，同一条流推拉流域名不同，但频道名一致。  
 > 注：以上域名、接入点及流名的命名仅为举例用，下同。 
 
 
