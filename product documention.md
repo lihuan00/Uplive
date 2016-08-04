@@ -5,6 +5,7 @@
 又拍云直播系统支持两种服务类型：又拍云源和自主源站。
 
 架构图片：客户端推流/编码器推流——又拍云加速中心（转码/录制）——用户观看端
+![UPYUN 源](http://image-pro.b0.upaiyun.com/product/uplive/image/%E5%AE%A2%E6%88%B7%E6%BA%90%E7%AB%99.jpg
 
 又拍云源：表示流媒体内容直接推流到又拍云 CDN ，将推流与分发都进行 CDN 加速。又拍云源现仅支持 RTMP 推流。
 
