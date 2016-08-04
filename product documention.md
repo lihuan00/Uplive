@@ -1,7 +1,7 @@
 ## 概述
 又拍直播云(UPLive)，基于又拍云内容分发网络为直播应用提供超低延迟、高码率、高并发的整套从推流端到播放端的一站式解决方案，支持 RTMP、HTTP-FLV 和 HLS 输出，包括录制、转码等附加功能。
 
-### 服务类型
+## 服务类型
 又拍云直播系统支持两种服务类型：又拍云源和自主源站。
 
 ![UPYUN 源](http://image-pro.b0.upaiyun.com/product/uplive/image/owner.jpg)
