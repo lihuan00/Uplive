@@ -102,23 +102,23 @@ Token 防盗链可以对推流和播放的请求进行校验，可设置签名�
 rtmp://push.domain.com/app/stream?domain={domain}&token={token}&expired_ts={expired_ts}
 ```
 参数说明:
-push.domain.com: 域名，由业务系统分配  
-expire_ts: 有效期，客户自由填写，超过有效期将停止服务  
-token: 需计算得出  
-计算公式：token = MD5(domain + expire_ts + secret)  
+push.domain.com: 域名，由业务系统分配。  
+expire_ts: 有效期，客户自由填写，超过有效期将停止服务。  
+token: 需计算得出，  
+计算公式：token = MD5(domain + expire_ts + secret)  ，
 比如 domain = publish.bravo.com，app = live, stream = stream, expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
 则 token=MD5(push.domain.com/live/stream1465244082a1b2c3d4e53gxwb07)  
-注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄
+注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。
 
 #### 拉流防盗链 
-详细规则见 CDNToken 防盗链规范:http://docs.upyun.com/cdn/feature/#token
+详细规则见 CDNToken 防盗链规范:http://docs.upyun.com/cdn/feature/#token。
 
 
 ## 增值服务
 
 ### 录播
-> 客户需提供的配置信息：需要录制的拉流 URL  
-> 录制方式：触发 or 定时录制
+> 客户需提供的配置信息：需要录制的拉流 URL。  
+> 录制方式：触发 or 定时录制。  
 
 录播的主要作用是将推流内容录制成文件，最终用于点播。
 
@@ -142,18 +142,20 @@ recorder20160604163702.mp4 为具体的录制文件，recorder 为固定标识�
 指定配置某一条流从几点开始录制，并到几点结束，不管在这时间段内推流断开几次，录制系统将在相应时间段内对其推流的所有流内容进行录制在同一文件名下，定时任务只生成一个文件。
 
 #### 回调
->客户需提供接收回调的地址（建议为URL）
+> 客户需提供接收回调的地址（建议为URL）。
 
 录制文件所在的路径以 post 请求返回给客户，具体的 json 格式为
-
+```
 {"timestamp": "2016-06-04 16:38:45",  
  "path": ["http://live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.mp4"]}
-
+```
 其中，timestamp 为发送 json 回调任务时间，path 为录制文件具体路径。
 
 ### 实时转码
+> 客户需提供需要转码的流、需要匹配的后缀及转码模板。
+
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率、输出流类型等流处理参数。
-默认支持使用又拍云直播服务的 RTMP，HTTP-FLV，HLS 协议的流转码 支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/ 支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
+默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和HLS 协议的流转码 支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/ 支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
 
 支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.domain.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p(16:9) 当有用户请求 http://play.domain.com/live/stream-small 时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
 
