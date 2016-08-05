@@ -4,8 +4,9 @@
 ## 服务类型
 又拍云直播系统支持两种服务类型：又拍云源和自主源站。
 
-![UPYUN 源](http://image-pro.b0.upaiyun.com/product/uplive/image/owner.png)
+<center>![UPYUN 源](http://image-pro.b0.upaiyun.com/product/uplive/image/owner.png)</center>  
 
+  
 又拍云源：表示流媒体内容直接推流到又拍云 CDN ，将推流与分发都进行 CDN 加速。又拍云源现仅支持 RTMP 推流。
 
 > 管理后台：直播加速 > 创建服务 > 又拍云源
@@ -20,8 +21,9 @@
 > 注：以上域名、接入点及流名的命名仅为举例用，下同。 
 
 
-![自主 源](http://image-pro.b0.upaiyun.com/product/uplive/image/guest.png)
+<center>![自主 源](http://image-pro.b0.upaiyun.com/product/uplive/image/guest.png)</center>
 
+  
 自主源站：流媒体内容在客户源站，又拍云通过回客户源拉流的方式对其内容进行 CDN 分发。
 
 > 管理后台：直播加速 > 创建服务 > 自主源站
