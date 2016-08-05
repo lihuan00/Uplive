@@ -120,7 +120,7 @@ HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链�
 
 ### 录播
 > 客户需提供的配置信息：需要录制的拉流 URL。  
-> 录制方式：触发 or 定时录制。  
+> 录制方式：触发或定时录制。  
 
 录播的主要作用是将推流内容录制成文件，最终用于点播。
 
@@ -129,11 +129,14 @@ HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链�
 又拍录制系统会自动将录制下来的内容上传到又拍云存储后，可以根据云存储获取目录文件列表 来获取相关录制文件列表。
 如果对录制文件格式有其他要求，可在又拍云处理中心对其进行相关处理，比如格式处理，视频拼接，详细请见[云处理文档](http://docs.upyun.com/cloud/)。
 
-录制文件具体路径为：  
+如果需要将 rtmp://play.domain.com/live/stream 这条流进行录制，录制后文件具体路径为：  
+```
 live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.mp4  
-其中 live-recorder.b0.upaiyun.com 为又拍云默认域名，又拍会将录制文件默认保存在相应空间以这条流 URL 为路径的目录下，即 live-recorder.b0.upaiyun.com/play.domain.com/live/stream/，  
-recorder20160604163702.mp4 为具体的录制文件，recorder 为固定标识字符，20160604163702 为录制完成时间，mp4为文件类型。   
-如果用又拍 cdn，直接可通过 http://用户加速域名/play.domain.com/live/stream/recorder20160604163702.mp4 来访问。
+```
+其中 live-recorder 为存储空间，录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，即 live-recorder.b0.upaiyun.com/play.domain.com/live/stream/，  
+recorder20160604163702.mp4 为具体的录制文件名，recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。   
+
+使用又拍 cdn，直接可通过 http://用户加速域名/play.domain.com/live/stream/recorder20160604163702.mp4 来访问，该过程即对存储内容进行点播。
 
 录制支持触发录制与定时录制两种方式。
 
