@@ -102,10 +102,10 @@ Token 防盗链可以对推流和播放的请求进行校验，可设置签名�
 ```
 rtmp://push.domain.com/app/stream?domain={domain}&token={token}&expired_ts={expired_ts}
 ```
-参数说明:  
-push.domain.com: 域名，由业务系统分配。  
-expire_ts: 有效期，客户自由填写，超过有效期将停止服务。  
-token: 需计算得出，  
+参数说明：  
+push.domain.com： 域名，由业务系统分配。  
+expire_ts：有效期，客户自由填写，超过有效期将停止服务。  
+token：需计算得出，  
 计算公式：token = MD5(domain + expire_ts + secret)，  
 比如 domain = publish.bravo.com，app = live, stream = stream, expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
 则 token=MD5(push.domain.com/live/stream1465244082a1b2c3d4e53gxwb07)  
@@ -170,7 +170,7 @@ live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.
 
 接口支持立即禁播，恢复禁播，禁播一段时间。
 
-> 如需转码、录制和禁播等功能请联系售前，如有任何问题、意见或建议，请咨询客服人员：  
+> 如需转码、录制和禁播等功能请联系售前，如有任何问题、意见或建议，请咨询客服人员。    
   客服热线：0571-81020203（售前）、0571-81020204（客服）  
   客服 QQ：200576786  
   技术支持：support@upyun.com  
