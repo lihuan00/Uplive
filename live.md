@@ -103,12 +103,14 @@ Token 防盗链可以对推流和播放的请求进行校验，可设置签名�
 rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts}
 ```
 参数说明：  
-push.com： 域名（domain），由业务系统分配。  
+domain：域名，开启 token 防盗链的域名。  
 expire_ts：有效期，客户自由填写，超过有效期将停止服务。  
-token：需计算得出，  
-计算公式：token = MD5(domain + expire_ts + secret)，  
-比如推流 URL 为 rtmp://push.com/live/stream，则 domain = push.com，expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
-那么 token=MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
+token：需计算得出，计算公式：token = MD5(domain + expire_ts + secret)。  
+
+示例：
+比如推流 URL 为 rtmp://push.com/live/stream，则 domain = push.com，  
+假设其 expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
+那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。  
 
 > 推流仅支持 token 防盗链  
