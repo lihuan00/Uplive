@@ -93,8 +93,6 @@
 
 开启该配置后，可通过 http://play.com/app/stream.m3u8 对 rtmp://push.com/app/stream 的推流进行播放。
 
-## 高级功能
-
 ### 推流防盗链 
 Token 防盗链可以对推流和播放的请求进行校验，可设置签名过期时间来控制流的访问时限。
  
@@ -162,7 +160,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 > 客户需提供需要转码的流、需要匹配的后缀及转码模板。
 
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率、输出流类型等流处理参数。
-默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和HLS 协议的流转码支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/  支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
+默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和 HLS 协议的流转码支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/  支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
 
 支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p(16:9) 当有用户请求 http://play.com/live/stream-small  时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
 
@@ -277,7 +275,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 * RTMP 直播累积延迟消除技术
 * 支持 speex 解码
 * 音画同步调整
-* 点播支持
+* 支持点播
 * 支持 seek 功能
 * 视频缓冲设置，缓冲进度
 * 支持预连接，后播放功能
