@@ -15,8 +15,8 @@
 可选择性填写接入点，如果填写了具体的接入点，则只有该接入点的 URL 可进行推流，其他接入点均推流失败。若没有填写具
 体接入点，则任意接入点可进行推流。
 
-> 当推流域名填写 push.domain.com ，播放域名填写 play.domain.com ，接入点填写 app ，如果推流 URL 为 
-> rtmp://push.domain.com/app/stream 时，其 rtmp 播放 URL 为 rtmp://play.domain.com/app/stream  
+> 当推流域名填写 push.com ，播放域名填写 play.com ，接入点填写 app ，如果推流 URL 为 
+> rtmp://push.com/app/stream 时，其 rtmp 播放 URL 为 rtmp://play.com/app/stream  
 > 其中，stream 为流名，又称流密钥，app/stream 又称为频道，同一条流推拉流域名不同，但频道名一致。  
 > 注：以上域名、接入点及流名的命名仅为举例用，下同。 
 
@@ -84,14 +84,14 @@
 
 通过管理后台，可以配置任一播放域名作为 HTTP-FLV 的输出域名。
 
-当推流 url 为 rtmp://push.domain.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.domain.com/app/stream.flv 进行播放。
+当推流 url 为 rtmp://push.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.com/app/stream.flv 进行播放。
 ### HLS 输出
 > 管理后台：服务 > 基础配置 > HLS 输出  
 > 源站类型：全部
 
 通过管理后台，可以配置任一播放域名作为 HLS 的输出域名。
 
-开启该配置后，可通过 http://play.domain.com/app/stream.m3u8 对 rtmp://push.domain.com/app/stream 的推流进行播放。
+开启该配置后，可通过 http://play.com/app/stream.m3u8 对 rtmp://push.com/app/stream 的推流进行播放。
 
 ## 高级功能
 
@@ -100,15 +100,15 @@ Token 防盗链可以对推流和播放的请求进行校验，可设置签名�
  
 一个最简的推流地址格式如下：
 ```
-rtmp://push.domain.com/app/stream?domain={domain}&token={token}&expired_ts={expired_ts}
+rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts}
 ```
 参数说明：  
-push.domain.com： 域名，由业务系统分配。  
+push.com： 域名（domain），由业务系统分配。  
 expire_ts：有效期，客户自由填写，超过有效期将停止服务。  
 token：需计算得出，  
 计算公式：token = MD5(domain + expire_ts + secret)，  
-比如 domain = publish.bravo.com，app = live, stream = stream, expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
-则 token=MD5(push.domain.com/live/stream1465244082a1b2c3d4e53gxwb07)  
+比如推流 URL 为 rtmp://push.com/live/stream，则 domain = push.com，expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
+那么 token=MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。  
 
 > 推流仅支持 token 防盗链  
@@ -129,14 +129,14 @@ HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链�
 又拍录制系统会自动将录制下来的内容上传到又拍云存储后，可以根据云存储获取目录文件列表 来获取相关录制文件列表。
 如果对录制文件格式有其他要求，可在又拍云处理中心对其进行相关处理，比如格式处理，视频拼接，详细请见[云处理文档](http://docs.upyun.com/cloud/)。
 
-如果需要将 rtmp://play.domain.com/live/stream 这条流进行录制，录制后文件具体路径为：  
+如果需要将 rtmp://play.com/live/stream 这条流进行录制，录制后文件具体路径为：  
 ```
-live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.mp4  
+live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4  
 
 其中 live-recorder 为存储空间，recorder20160604163702.mp4 为具体的录制文件名，recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。
 ```
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
-即 live-recorder.b0.upaiyun.com/play.domain.com/live/stream/，使用又拍 cdn，直接可通过   http://用户加速域名/play.domain.com/live/stream/recorder20160604163702.mp4 来访问，该过程即对存储内容进行点播，文件加速的功能在录播中同样适用。
+即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍 cdn，直接可通过   http://用户加速域名/play.com/live/stream/recorder20160604163702.mp4 来访问，该过程即对存储内容进行点播，文件加速的功能在录播中同样适用。
 
 录制支持触发录制与定时录制两种方式。
 
@@ -152,7 +152,7 @@ live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.
 录制文件所在的路径以 post 请求返回给客户，具体的 json 格式为
 ```
 {"timestamp": "2016-06-04 16:38:45",  
- "path": ["http://live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.mp4"]}
+ "path": ["http://live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4"]}
 ```
 其中，timestamp 为发送 json 回调任务时间，path 为录制文件具体路径。
 
@@ -162,7 +162,7 @@ live-recorder.b0.upaiyun.com/play.domain.com/live/stream/recorder20160604163702.
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率、输出流类型等流处理参数。
 默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和HLS 协议的流转码支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/  支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
 
-支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.domain.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p(16:9) 当有用户请求 http://play.domain.com/live/stream-small  时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
+支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p(16:9) 当有用户请求 http://play.com/live/stream-small  时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
 
 ### 禁播
 互动直播业务特性为：直播视频内容由主播实时推送至服务器,若主播传播非法内容,则影响巨大。因此厂商需要对直播视频内容进行实时监控,当出现非法内容时,及时禁止非法内容的传播。
