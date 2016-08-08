@@ -119,7 +119,7 @@ HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链�
 ## 增值服务
 
 ### 录播
-> 客户需提供的配置信息：需要录制的拉流 URL。  
+> 需提供的配置信息：需要录制的拉流 URL。  
 > 录制方式：触发或定时录制。  
 
 录播的主要作用是将推流内容录制成文件，最终用于点播。
@@ -133,7 +133,8 @@ HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链�
 ```
 live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4  
 
-其中 live-recorder 为存储空间，recorder20160604163702.mp4 为具体的录制文件名，recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。
+其中 live-recorder 为存储空间，recorder20160604163702.mp4 为具体的录制文件名，  
+recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。
 ```
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
 即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍 cdn，直接可通过   http://用户加速域名/play.com/live/stream/recorder20160604163702.mp4 来访问，该过程即对存储内容进行点播，文件加速的功能在录播中同样适用。
@@ -147,7 +148,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 指定配置某一条流从几点开始录制，并到几点结束，不管在这时间段内推流断开几次，录制系统将在相应时间段内对其推流的所有流内容进行录制在同一文件名下，定时任务只生成一个文件。
 
 #### 回调
-> 客户需提供接收回调的地址（建议为URL）。
+> 需提供接收回调的地址（建议为URL）。
 
 录制文件所在的路径以 post 请求返回给客户，具体的 json 格式为
 ```
@@ -157,7 +158,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 其中，timestamp 为发送 json 回调任务时间，path 为录制文件具体路径。
 
 ### 转码
-> 客户需提供需要转码的流、需要匹配的后缀及转码模板。
+> 需提供需要转码的流、需要匹配的后缀及转码模板。
 
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率、输出流类型等流处理参数。
 默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和 HLS 协议的流转码支持 12 种转码模板和客户自定义转码配置，详细模板信息：http://docs.upyun.com/cloud/attachment/  支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
@@ -264,9 +265,9 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 * 支持播放器音量设置，可实现静音功能
 * 支持纯音频播放
 * 支持直播累积延时优化
-* 支持 ARM, ARMv7a, ARM64v8a, X86 主流芯片体系架构
+* 支持 ARM，ARMv7a，ARM64v8a，X86 主流芯片体系架构
 * 可高度定制化的 MediaController
-* 高可定制:可自定义尺寸，按钮，进度条，全屏，旋转等UI属性
+* 高可定制：可自定义尺寸，按钮，进度条，全屏，旋转等UI属性
 * 单音频播放
 * RTMP 直播首屏秒开支持
 * RTMP 直播累积延迟消除技术
