@@ -113,7 +113,7 @@ token：需计算得出，计算公式：token = MD5(domain + expire_ts + secret
 > 推流仅支持 token 防盗链。  
 
 ### 拉流防盗链   
-HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链规范：http://docs.upyun.com/cdn/feature/#_1。
+HTTP 协议拉流防盗链规则同文件加速，详细规则见[ CDN 防盗链规范](http://docs.upyun.com/cdn/feature/#_1)。
 
 ## 增值服务
 
