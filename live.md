@@ -1,5 +1,5 @@
 ## 概述
-又拍直播云(UPLive)，基于又拍云内容分发网络为直播应用提供超低延迟、高码率、高并发的从推流端到播放端的一站式解决方案，支持 RTMP、HTTP-FLV 和 HLS 输出等基本功能，包括录制、转码等增值服务。
+又拍直播云（UPLive），基于又拍云内容分发网络为直播应用提供超低延迟、高码率、高并发的从推流端到播放端的一站式解决方案，支持 RTMP、HTTP-FLV 和 HLS 输出等基本功能，包括录制、转码等增值服务。
 
 ## 服务类型
 又拍云直播系统支持两种服务类型：又拍云源和自主源站。
@@ -28,11 +28,11 @@
 
 > 管理后台：直播加速 > 创建服务 > 自主源站
 
-自主源站需要明确回源协议是 RTMP 还是 HTTP，并填写源站 IP 或者 域名，回源 IP 现不支持多个，若回源 IP 会经常变更，建议源站填写域名形式。当回源协议是 RTMP 时，默认端口是1935，当回源协议是 HTTP 时，默认端口为 80，支持端口自定义。因自主源站是回客户源拉流，则无推流域名，只需要设置播放域名。
+自主源站需要明确回源协议是 RTMP 还是 HTTP，并填写源站 IP 或者 域名，回源 IP 现不支持多个，若回源 IP 会经常变更，建议源站填写域名形式。当回源协议是 RTMP 时，默认端口是 1935，当回源协议是 HTTP 时，默认端口为 80，支持端口自定义。因自主源站是回客户源拉流，则无推流域名，只需要设置播放域名。
 >  HTTP 协议回源时，以 HTTP-FLV 形式回源，若源为 HLS 可通过文件加速系统创建服务，配置回源信息。  
 >  接入点配置说明同又拍云源。
 
-以上两种业务模式，均支持RTMP、HTTP-FLV 和HLS 播放，后续章节会详细介绍。
+以上两种业务模式，均支持 RTMP、HTTP-FLV 和HLS 播放，后续章节会详细介绍。
 
 ## 基础配置
 直播基础配置是直播业务场景使用非常频繁的功能。
@@ -64,10 +64,10 @@
 * 添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
 
 > 当业务模式为又拍云源时，用户需要将其推流域名和播放域名分别 CNAME 到对应的又拍云内部域名。  
-> 推流内部域名为`<bucket>.s1.aicdn.com`，播放内部域名为`<bucket>.s0.aicdn.com`。  
-> 注：`<>`内的 bucket 需要替换成对应的服务名，下同。
+> 推流内部域名为 `<bucket>.s1.aicdn.com`，播放内部域名为 `<bucket>.s0.aicdn.com`。  
+> 注：`<>` 内的 bucket 需要替换成对应的服务名，下同。
 
-> 当业务模式为自主源站时，用户只需要将其播放域名 CNAME 到对应的又拍云播放内部域名`<bucket>.s0.aicdn.com`。    
+> 当业务模式为自主源站时，用户只需要将其播放域名 CNAME 到对应的又拍云播放内部域名 `<bucket>.s0.aicdn.com`。    
 
 ### 回源配置
 > 管理后台：服务 > 基础配置 > 回源配置  
@@ -109,9 +109,8 @@ token：需计算得出，计算公式：token = MD5(domain + expire_ts + secret
 比如推流 URL 为 rtmp://push.com/live/stream，则 domain = push.com，  
 假设其 expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
 那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
-注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识。客户需妥善保管，谨防外泄。  
-
-> 推流仅支持 token 防盗链  
+> 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识，客户需妥善保管，谨防外泄。  
+> 推流仅支持 token 防盗链。  
 
 ### 拉流防盗链   
 HTTP 协议拉流防盗链规则同文件加速，详细规则见 CDN 防盗链规范：http://docs.upyun.com/cdn/feature/#_1。
@@ -137,7 +136,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。
 ```
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
-即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍 cdn，直接可通过   http://用户加速域名/play.com/live/stream/recorder20160604163702.mp4 来访问，该过程即对存储内容进行点播，文件加速的功能在录播中同样适用。
+即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍 cdn，直接可通过   http://client.com/play.com/live/stream/recorder20160604163702.mp4 来访问，client.com 为客户点播域名，需绑定在录制文件所有的云存储空间，该过程即对存储内容进行点播。
 
 录制支持触发录制与定时录制两种方式。
 
