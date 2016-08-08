@@ -61,7 +61,7 @@
 [x] *.bar.yourdomain.com => foo.bar.baz.yourdomain.com
 ```
 
-添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
+添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 cname 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 cname 解析到 `<bucket>.s0.aicdn.com`。
 
 > 当业务模式为又拍云源时，用户需要将其推流域名和播放域名分别 CNAME 到对应的又拍云内部域名。  
 > 推流 cname 域名为 `<bucket>.s1.aicdn.com`，播放 cname 域名为 `<bucket>.s0.aicdn.com`。  
