@@ -46,7 +46,7 @@
 审核结果会通过邮件进行通知，正常审核时间为一个工作日。
 以下是关于域名绑定的一些重要说明（同文件加速）：
 
-* 除常规形式的域名外（包括顶级域名），我们还支持泛域名绑定，比如 *.yourdomain.com；特别地，其中 * 最多支持匹配 4 层：
+除常规形式的域名外（包括顶级域名），我们还支持泛域名绑定，比如 *.yourdomain.com；特别地，其中 * 最多支持匹配 4 层：
 
 ```
 [v] *.yourdomain.com => foo.yourdomain.com
@@ -61,7 +61,7 @@
 [x] *.bar.yourdomain.com => foo.bar.baz.yourdomain.com
 ```
 
-* 添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
+添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
 
 > 当业务模式为又拍云源时，用户需要将其推流域名和播放域名分别 CNAME 到对应的又拍云内部域名。  
 > 推流 cname 域名为 `<bucket>.s1.aicdn.com`，播放 cname 域名为 `<bucket>.s0.aicdn.com`。  
