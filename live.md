@@ -225,14 +225,13 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 ## IOS 播放器 SDK
 ### 系统说明
 * 支持 iOS 8 及以上系统版本   
-* 支持 ARMv7，ARM64，x86_64 架构
+* 支持 ARMv7，ARM64，x86_64 架构  
+
 ### 功能说明
-* RTMP 直播流播放
-* HTTP-FLV 直播流播放
-* HLS 播放
+* 支持 RTMP 、HLS 和 HTTP-flv 协议的直播流媒体播放放
 * 高可定制:可自定义尺寸，按钮，进度条，全屏，旋转等UI属性
-* 单音频播放
-* RTMP 直播首屏秒开支持
+* 支持单音频播放
+* 支持 RTMP 直播首屏秒开
 * RTMP 直播累积延迟消除技术
 * 支持 speex 解码
 * 音画同步调整
@@ -257,9 +256,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 * 支持 ARMv5，ARMv7,ARMv8 版本
 
 ###  功能说明
-* Android Min API 9
-* 基于 ijkplayer ( based on ffplay )
-* 支持 RTMP 和 HLS 协议的直播流媒体播放
+* 支持 RTMP 、HLS 和 HTTP-flv 协议的直播流媒体播放
 * 支持常见的音视频文件播放（MP4、M4A、flv 等）
 * 支持 MediaCodec 硬件解码
 * 提供播放器核心类 PLMediaPlayer
