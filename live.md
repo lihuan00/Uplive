@@ -138,7 +138,7 @@ live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4
 recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件类型。
 ```
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
-即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍 cdn，直接可通过   http://client.com/play.com/live/stream/recorder20160604163702.mp4 来访问，client.com 为客户点播域名，需绑定在录制文件所有的云存储空间，该过程即对存储内容进行点播。
+即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍文件加速服务，直接可通过   http://client.com/play.com/live/stream/recorder20160604163702.mp4 来访问，client.com 为客户点播域名，需绑定在录制文件所有的云存储空间，该过程即对存储内容进行点播。
 
 录制支持触发录制与定时录制两种方式。
 
@@ -164,7 +164,7 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 支持音视频流实时转码处理，通过转码模版可配置编码标准、分辨率、码率及输出流类型等流处理参数。
 默认支持使用又拍云直播服务的 RTMP，HTTP-FLV 和 HLS 协议的流转码支持 12 种转码模板和客户自定义转码配置，详细模板信息,参考[视频转码预置模板](http://docs.upyun.com/cloud/attachment/ ) 支持自定义转码后缀，分隔符支持中划线（-）、下划线（_）和感叹号（!）。
 
-支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p(16:9) 当有用户请求 http://play.com/live/stream-small  时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
+支持触发式转码，需提前配置需要转码的流地址以及转码的触发后缀，如 需要转码的原始流为：http://play.com/live/stream 触发转码的后缀匹配为 -small，对应的转码模板为 540p（16:9） 当有用户请求 http://play.com/live/stream-small  时触发转码，当最后一个请求该转码流的用户断开连接后，停止转码。
 
 ### 禁播
 互动直播业务特性为：直播视频内容由主播实时推送至服务器,若主播传播非法内容,则影响巨大。因此厂商需要对直播视频内容进行实时监控,当出现非法内容时,及时禁止非法内容的传播。
