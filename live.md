@@ -86,7 +86,7 @@
 
 当推流 url 为 rtmp://push.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.com/app/stream.flv 进行播放。
 ### HLS +
-> 管理后台：服务 > 基础配置 > HLS +  
+> 管理后台：服务 > 基础配置 > HLS+  
 > 源站类型：全部
 
 通过管理后台，可以配置任一播放域名作为 HLS 的输出域名。
