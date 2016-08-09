@@ -24,7 +24,7 @@
 <center>![自主 源](http://image-pro.b0.upaiyun.com/product/uplive/image/guest.png)</center>
 
   
-自主源站：流媒体内容在客户源站，又拍云通过回客户源拉流的方式对其内容进行 CDN 分发。
+自主源站：流媒体内容在客户源站，又拍云通过回客户源拉流的方式对其内容进行分发。
 
 > 管理后台：直播加速 > 创建服务 > 自主源站
 
@@ -85,6 +85,7 @@
 通过管理后台，可以配置任一播放域名作为 HTTP-FLV 的输出域名。
 
 当推流 url 为 rtmp://push.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.com/app/stream.flv 进行播放。
+
 ### HLS +
 > 管理后台：服务 > 基础配置 > HLS+  
 > 源站类型：全部
@@ -110,12 +111,12 @@ token：需计算得出，计算公式：token = MD5(domain + expire_ts + secret
 假设其 expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
 那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
 > 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识，客户需妥善保管，谨防外泄。  
-> 推流仅支持 token 防盗链。  
+> 推流暂仅支持 token 防盗链。  
 
 ### 拉流防盗链   
 拉流防盗链只针对播放域名，HTTP 协议拉流防盗链规则同文件加速，详细规则见文件加速[ 防盗链](http://docs.upyun.com/cdn/feature/#_1)。  
 
-> 拉流现仅支持 HTTP-FLV 和 HLS 防盗链，RTMP 防盗链在开发中。
+> 拉流暂仅支持 HTTP-FLV 和 HLS 防盗链。
 
 ## 增值服务
 
