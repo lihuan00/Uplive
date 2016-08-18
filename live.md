@@ -128,7 +128,7 @@ expire_ts：截止时间，截止时间到后，服务器主动断开已建立�
 ```
 当只使用有效时间时,有效时间后，该 token 失效，但服务器不会主动断开建立的 token 连接。  
 
-rtmp://push/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}  
+rtmp://push.com/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}  
 
 token = MD5(domain/app/stream + valid_ts + secret)  
 ```
@@ -136,7 +136,7 @@ token = MD5(domain/app/stream + valid_ts + secret)
 ```
 当只使用截止时间时，截止时间后，服务器主动断开已有的 token 连接，在截止时间前，该 token 推流均可用。  
 
-rtmp://push/live/stream?domain={domain}&token={token}&expired_ts={expired_ts} 
+rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts} 
 
 token = MD5(domain/app/stream + expired_ts + secret)  
 ```
@@ -146,7 +146,7 @@ token = MD5(domain/app/stream + expired_ts + secret)
 > 推流暂仅支持 token 防盗链。  
 
 ### 拉流防盗链   
-拉流防盗链只针对播放域名，HTTP 协议拉流防盗链规则同文件加速，包括 IP 禁用、地区访问限制、回源鉴权、Token防盗链、域名防盗链等。详细规则见文件加速[ 防盗链](http://docs.upyun.com/cdn/feature/#_1)。 
+拉流防盗链只针对播放域名，HTTP 协议拉流防盗链规则同文件加速，包括 IP 禁用、地区访问限制、回源鉴权、Token 防盗链、域名防盗链等。详细规则见文件加速[ 防盗链](http://docs.upyun.com/cdn/feature/#_1)。 
 
 > 拉流暂仅支持 HTTP-FLV 和 HLS 防盗链。
 
@@ -155,7 +155,6 @@ token = MD5(domain/app/stream + expired_ts + secret)
 ### 录播
 > 需提供的配置信息：需要录制的拉流 URL    
 > 录制方式：触发或定时录制    
-> 源站类型：又拍云源
 
 录播的主要作用是将推流内容录制成文件，最终用于点播。
 
@@ -177,9 +176,12 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 录制支持触发录制与定时录制两种方式，并且支持15s内断开重连后的文件合并，但断流前后的直播流分辨率需要保持一致。
 
 #### 触发录制
+> 源站类型：又拍云源
+
 指定配置某一条流为触发录制的流，则在这条流推流到又拍 CDN 的时候，又拍录制系统就对其开始录制，当这推流断开后停止录制，再推流后又继续开始录，以此循环。推流断开时，录制文件自动停止录制，下次再推流后，录制的文件名将与前一文件名不一样，这样同一条流会生成多个不同文件，并以文件名最后的时间表示其先后顺序。
 
 #### 定时录制
+> 源站类型：全部
 指定配置某一条流从几点开始录制，并到几点结束，不管在这时间段内推流断开几次，录制系统将在相应时间段内对其推流的所有流内容进行录制在同一文件名下，定时任务只生成一个文件。
 
 #### 回调
