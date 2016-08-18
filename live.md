@@ -107,7 +107,7 @@ rtmp://push/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}&expire
 token = MD5(domain/app/stream + valid_ts + expire_ts + secret)
 ```
 参数说明：  
-secret：密钥（32 位以内的数字或英文组合），用户与又拍约定。  
+secret：密钥，用户与又拍约定，要求 32 位以内的数字、大小写英文字母、中划线、下划线及特殊字符 ~ ! @ # $ _ % ^ & * ( ) 组合。  
 domain：域名，开启 token 防盗链的域名。  
 valid_ts：有效时间，在 token 有效期内同一条 token 推流 URL 一直有效，服务器不会主动断开，valid_ts 必须是 UNIX TIME 格式，如 1472659200，表示 2016/9/1 00:00:00。  
 expire_ts：截止时间，截止时间到后，服务器主动断开已建立的 token 推流连接，expir_ts 必须是 UNIX TIME 格式，如 1473004800，表示 2016/9/5 00:00:00。  
