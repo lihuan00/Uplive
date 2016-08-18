@@ -6,7 +6,7 @@
 
 <center>![UPYUN 源](http://image-pro.b0.upaiyun.com/product/uplive/image/owner2.png)</center>  
 
-  
+
 又拍云源：表示流媒体内容直接推流到又拍云 CDN ，将推流与分发都进行 CDN 加速。又拍云源现仅支持 RTMP 推流。
 
 > 管理后台：直播加速 > 创建服务 > 又拍云源
@@ -23,7 +23,7 @@
 
 <center>![自主 源](http://image-pro.b0.upaiyun.com/product/uplive/image/guest.png)</center>
 
-  
+
 自主源站：流媒体内容在客户源站，又拍云通过回客户源拉流的方式对其内容进行分发。
 
 > 管理后台：直播加速 > 创建服务 > 自主源站
@@ -95,26 +95,35 @@
 开启该配置后，可通过 http://play.com/app/stream.m3u8 对 rtmp://push.com/app/stream 的推流进行播放。
 
 ### 推流防盗链 
-Token 防盗链可以对推流和播放的请求进行校验，可设置签名过期时间来控制流的访问时限。
- 
-一个最简的推流地址格式如下：
+> 配置需提供密钥    
+
+Token 防盗链可以对推流的请求进行校验，可设置 token 过期时间来控制推流的时限。  
+
+一个含防盗链的推流地址格式如下：  
 ```
-rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts}
+rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts}  
+
+token =  MD5(domain + expire_ts + secret)  
 ```
 参数说明：  
+secret：密钥（32 位以内的数字或英文组合），用户与又拍约定。  
 domain：域名，开启 token 防盗链的域名。  
-expire_ts：有效期，客户自由填写，超过有效期将停止服务。  
-token：需计算得出，计算公式：token = MD5(domain + expire_ts + secret)。  
+expire_ts：过期时间，超过过期时间将推流失败，必须是 UNIX TIME 格式，如 1465244082，表示 2016/6/7 4:14:43。  
 
-示例：
-比如推流 URL 为 rtmp://push.com/live/stream，则 domain = push.com，  
-假设其 expired_ts = 1465244082，secret = a1b2c3d4e53gxwb07  
-那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07)  
-> 注：计算公式中的 secret，由业务系统提供并告知客户，作为客户的唯一标识，客户需妥善保管，谨防外泄。  
+示例：  
+推流 URL 为 rtmp://push.com/live/stream，  
+则 domain = push.com，  
+假设约定 secret = a1b2c3d4e53gxwb07，过期时间 expired_ts = 1465244082，  
+那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07) = 01bba135ee88d6e4e9053ed716e938c3 ，  
+注意 MD5 后计算出的 token 值是 32 位的，必须小写。  
+则 rtmp://push.com/live/stream?domain=push.com&token=01bba135ee88d6e4e9053ed716e938c3
+&expired_ts=1465244082， 推流在未超过 2016/6/7 4:14:43 之前均可以正常推流。  
+
+> 注：计算公式中的 secret，客户需妥善保管，谨防外泄。  
 > 推流暂仅支持 token 防盗链。  
 
 ### 拉流防盗链   
-拉流防盗链只针对播放域名，HTTP 协议拉流防盗链规则同文件加速，详细规则见文件加速[ 防盗链](http://docs.upyun.com/cdn/feature/#_1)。  
+拉流防盗链只针对播放域名，HTTP 协议拉流防盗链规则同文件加速，包括 IP 禁用、地区访问限制、回源鉴权、Token防盗链、域名防盗链等。详细规则见文件加速[ 防盗链](http://docs.upyun.com/cdn/feature/#_1)。 
 
 > 拉流暂仅支持 HTTP-FLV 和 HLS 防盗链。
 
@@ -141,7 +150,7 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
 即 live-recorder.b0.upaiyun.com/play.com/live/stream/，使用又拍文件加速服务，直接可通过   http://client.com/play.com/live/stream/recorder20160604163702.mp4 来访问，client.com 为客户点播域名，需绑定在录制文件所有的云存储空间，该过程即对存储内容进行点播。
 
-录制支持触发录制与定时录制两种方式。
+录制支持触发录制与定时录制两种方式，并且支持15s内断开重连后的文件合并，但断流前后的直播流分辨率需要保持一致。
 
 #### 触发录制
 指定配置某一条流为触发录制的流，则在这条流推流到又拍 CDN 的时候，又拍录制系统就对其开始录制，当这推流断开后停止录制，再推流后又继续开始录，以此循环。推流断开时，录制文件自动停止录制，下次再推流后，录制的文件名将与前一文件名不一样，这样同一条流会生成多个不同文件，并以文件名最后的时间表示其先后顺序。
@@ -174,47 +183,48 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 接口支持立即禁播，解除禁播，以及禁播一段时间后自动解除。
 
 > 如需转码、录制和禁播等功能请联系售前，如有任何问题、意见或建议，请咨询客服人员。    
-  客服热线：0571-81020203（售前）、0571-81020204（客服）  
-  客服 QQ：200576786  
-  技术支持：support@upyun.com  
-  建议反馈：feedback@upyun.com  
+>   客服热线：0571-81020203（售前）、0571-81020204（客服）  
+>   客服 QQ：200576786  
+>   技术支持：support@upyun.com  
+>   建议反馈：feedback@upyun.com  
 
-## IOS 推流 SDK
-### 系统说明
+## 移动端 SDK
+### IOS 推流 SDK
+#### 系统说明
 * 支持 iOS 8 及以上系统版本   
 * 支持 ARMv7，ARM64，x86_64 架构
 
-###  功能说明
- * 采集模块源码开放，音视频可以自由配置  
- * 支持硬件编码  
- * 多码率可选  
- * 支持 H.264 视频编码  
- * 支持 AAC 音频编码  
- * 支持前后摄像头  
- * 支持自动对焦  
- * 支持手动调整对焦点  
- * 支持闪光灯操作  
- * 支持多分辨率编码   
- * 支持构造带安全授权凭证的 RTMP 推流地址  
- * 支持 ARMv7, ARM64, x86_64 架构  
- * 支持 RTMP 协议直播推流    
- * 支持推流时可变码率  
- * 提供发送 buffer      
- * 支持视频 Orientation 操作   
- * 支持弱网丢帧策略   
- * 支持后台音频推流  
- * 支持水印功能  
- * 支持美颜功能  
-  
+####  功能说明
+* 采集模块源码开放，音视频可以自由配置  
+* 支持硬件编码  
+* 多码率可选  
+* 支持 H.264 视频编码  
+* 支持 AAC 音频编码  
+* 支持前后摄像头  
+* 支持自动对焦  
+* 支持手动调整对焦点  
+* 支持闪光灯操作  
+* 支持多分辨率编码   
+* 支持构造带安全授权凭证的 RTMP 推流地址  
+* 支持 ARMv7, ARM64, x86_64 架构  
+* 支持 RTMP 协议直播推流    
+* 支持推流时可变码率  
+* 提供发送 buffer      
+* 支持视频 Orientation 操作   
+* 支持弱网丢帧策略   
+* 支持后台音频推流  
+* 支持水印功能  
+* 支持美颜功能  
+
 项目地址：https://github.com/upyun/ios-live-sdk  
 反馈及建议：livesdk@upai.com
 
-## 安卓推流 SDK
-###  系统说明
+### 安卓推流 SDK
+####  系统说明
 * Android 4.1(API 16) 以上
 * 支持 ARMv5，ARMv7，ARMv8 版本
 
-###  功能说明
+####  功能说明
 * 支持 H.264 和 AAC 硬编
 * 硬编支持 Android Min API 18（Android 4.3）及其以上版本
 * 支持 RTMP 封包及推流
@@ -225,12 +235,12 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 项目地址：https://github.com/upyun/android-push-sdk  
 反馈及建议：livesdk@upai.com
 
-## IOS 播放器 SDK
-### 系统说明
+### IOS 播放器 SDK
+#### 系统说明
 * 支持 iOS 8 及以上系统版本   
 * 支持 ARMv7，ARM64，x86_64 架构  
 
-### 功能说明
+#### 功能说明
 * 支持 RTMP 、HLS 和 HTTP-FLV 协议的直播流媒体播放
 * 高可定制：可自定义尺寸，按钮，进度条，全屏，旋转等 UI 属性
 * 支持单音频播放
@@ -249,16 +259,16 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 * 支持流信息，播放器信息察看（Dashboard）
 * 支持播放本地视频文件
 * 集成播放质量监控  
-  
+
 项目地址：https://github.com/upyun/ios-live-sdk  
 反馈及建议：livesdk@upai.com
 
-## 安卓播放器 SDK
-###  系统说明
+### 安卓播放器 SDK
+####  系统说明
 * Android 2.3 (API 9) 及其以上
 * 支持 ARMv5，ARMv7，ARMv8 版本
 
-###  功能说明
+####  功能说明
 * 支持 RTMP 、HLS 和 HTTP-FLV 协议的直播流媒体播放
 * 支持常见的音视频文件播放（MP4、M4A、FLV 等）
 * 支持 MediaCodec 硬件解码
@@ -288,4 +298,3 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 
 项目地址：https://github.com/upyun/android-player-sdk  
 反馈及建议：livesdk@upai.com
-
