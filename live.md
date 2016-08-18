@@ -97,29 +97,32 @@
 ### 推流防盗链 
 > 配置需提供密钥    
 
-Token 防盗链可以对推流的请求进行校验，可设置 token 过期时间来控制推流的时限。  
+Token 防盗链可以对推流的请求进行校验，可设置 token 有效时间和截止时间来控制推流的时限。  
 
 一个含防盗链的推流地址格式如下：  
 ```
-rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts}  
+rtmp://push/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}&expired_ts={expired_ts}
 
-token =  MD5(domain + expire_ts + secret)  
+token = MD5(domain/app/stream + valid_ts + expire_ts + secret)
 ```
 参数说明：  
 secret：密钥（32 位以内的数字或英文组合），用户与又拍约定。  
 domain：域名，开启 token 防盗链的域名。  
-expire_ts：过期时间，超过过期时间将推流失败，必须是 UNIX TIME 格式，如 1465244082，表示 2016/6/7 4:14:43。  
+valid_ts：有效时间，在 token 有效期内同一条 token 推流 URL 一直有效，服务器不会主动断开，valid_ts 必须是 UNIX TIME 格式，如 1472659200，表示 2016/9/1 00:00:00。  
+expire_ts：截止时间，截止时间到后，服务器主动断开已建立的 token 推流连接，expir_ts 必须是 UNIX TIME 格式，如 1473004800，表示 2016/9/5 00:00:00。  
 
+```
 示例：  
 推流 URL 为 rtmp://push.com/live/stream，  
 则 domain = push.com，  
-假设约定 secret = a1b2c3d4e53gxwb07，过期时间 expired_ts = 1465244082，  
-那么 token = MD5(push.com/live/stream1465244082a1b2c3d4e53gxwb07) = 01bba135ee88d6e4e9053ed716e938c3 ，  
-注意 MD5 后计算出的 token 值是 32 位的，必须小写。  
-则 rtmp://push.com/live/stream?domain=push.com&token=01bba135ee88d6e4e9053ed716e938c3
-&expired_ts=1465244082， 推流在未超过 2016/6/7 4:14:43 之前均可以正常推流。  
+假设约定 secret = a1b2c3d4e53gxwb07，有效时间 valid_ts = 1472659200，截止时间 expired_ts = 1465244082，  
+那么 token = MD5(push.com/live/stream14726592001465244082a1b2c3d4e53gxwb07) = 67905e046efc00996da3d87552824aa7 ，  
+  
+则 rtmp://push.com/live/stream?domain=push.com&token=67905e046efc00996da3d87552824aa7&valid_ts=1472659200&expired_ts=1465244082， 该 token 防盗链在 2016/9/1 00:00:00 之前推流都有效，而到 2016/9/5 00:00:00 后，所有的推流连接都将被服务器断开。  
 
+```
 > 注：计算公式中的 secret，客户需妥善保管，谨防外泄。  
+> 注意 MD5 后计算出的 token 值是 32 位的，必须小写。  
 > 推流暂仅支持 token 防盗链。  
 
 ### 拉流防盗链   
