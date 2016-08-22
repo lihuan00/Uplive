@@ -15,9 +15,9 @@
 可选择性填写接入点，如果填写了具体的接入点，则只有该接入点的 URL 可进行推流，其他接入点均推流失败。若没有填写具
 体接入点，则任意接入点可进行推流。
 
-> 当推流域名填写 push.com ，播放域名填写 play.com ，接入点填写 app ，如果推流 URL 为 
-> rtmp://push.com/app/stream 时，其 rtmp 播放 URL 为 rtmp://play.com/app/stream  
-> 其中，stream 为流名，又称流密钥，app/stream 又称为频道，同一条流推拉流域名不同，但频道名一致。  
+> 当推流域名填写 push.com ，播放域名填写 play.com ，接入点填写 live ，如果推流 URL 为 
+> rtmp://push.com/live/stream 时，其 rtmp 播放 URL 为 rtmp://play.com/live/stream  
+> 其中，stream 为流名，又称流密钥，live/stream 又称为频道，同一条流推拉流域名不同，但频道名一致。  
 > 注：以上域名、接入点及流名的命名仅为举例用，下同。 
 
 
@@ -84,7 +84,7 @@
 
 通过管理后台，可以配置任一播放域名作为 HTTP-FLV 的输出域名。
 
-当推流 url 为 rtmp://push.com/app/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.com/app/stream.flv 进行播放。
+当推流 url 为 rtmp://push.com/live/stream 时，对域名播放域名开启 HTTP-FLV 输出配置后， 可以通过 http://play.com/live/stream.flv 进行播放。
 
 ### HLS +
 > 管理后台：服务 > 基础配置 > HLS+  
@@ -92,7 +92,7 @@
 
 通过管理后台，可以配置任一播放域名作为 HLS 的输出域名。HLS+ ，又称为流式 HLS 技术，是将标准的 HLS 进行流式处理，大幅度降低标准 HLS 延迟，H5 端直播兼容性更好，且具有回源量小、系统简单、排错容易、防盗链、避免 HLS 404 等优势。
 
-开启该配置后，可通过 http://play.com/app/stream.m3u8 对 rtmp://push.com/app/stream 的推流进行播放。
+开启该配置后，可通过 http://play.com/live/stream.m3u8 对 rtmp://push.com/live/stream 的推流进行播放。
 
 ### 推流防盗链 
 > 配置需提供密钥   
@@ -130,7 +130,7 @@ expire_ts：截止时间，截止时间到后，服务器主动断开已建立�
 
 rtmp://push.com/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}  
 
-token = MD5(domain/app/stream + valid_ts + secret)  
+token = MD5(domain/live/stream + valid_ts + secret)  
 ```
 
 ```
@@ -138,7 +138,7 @@ token = MD5(domain/app/stream + valid_ts + secret)
 
 rtmp://push.com/live/stream?domain={domain}&token={token}&expired_ts={expired_ts} 
 
-token = MD5(domain/app/stream + expired_ts + secret)  
+token = MD5(domain/live/stream + expired_ts + secret)  
 ```
 
 > 注：计算公式中的 secret，客户需妥善保管，谨防外泄。  
