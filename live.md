@@ -104,7 +104,7 @@ Token 防盗链可以对推流的请求进行校验，可设置 token 有效时�
 ```
 rtmp://push/live/stream?domain={domain}&token={token}&valid_ts={valid_ts}&expired_ts={expired_ts}
 
-token = MD5(domain/app/stream + valid_ts + expire_ts + secret)
+token = MD5(domain/live/stream + valid_ts + expire_ts + secret)
 ```
 参数说明：  
 secret：密钥，用户与又拍约定，要求 32 位以内的数字、大小写英文字母、中划线、下划线及特殊字符 ~ ! @ # $ _ % ^ & * ( ) 组合。  
