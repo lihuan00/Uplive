@@ -94,7 +94,7 @@
 
 开启该配置后，可通过 http://play.com/live/stream.m3u8 对 rtmp://push.com/live/stream 的推流进行播放。
 
-> 要将 RTMP 推流进行 HLS 转协议播放，推流的视频格式仅支持 H264，音频支持 AAC，MP3，音频默认为 AAC，若为 MP3，需要又拍人工配置。
+> 要将 RTMP 推流进行 HLS 转协议播放，推流的视频格式仅支持 H264，音频支持 AAC，MP3，音频默认为 AAC，若为 MP3，需要又拍人工配置。hls+ 支持纯音频输出，暂需人工配置。
 
 ### 推流防盗链 
 > 配置需提供密钥   
