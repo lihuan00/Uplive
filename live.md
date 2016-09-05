@@ -209,7 +209,7 @@ recorder 为标识字符，20160604163702 为录制完成时间，mp4 为文件�
 
 ```
 示例：
-原始流为 rtmp://play.com/live/stream 配置的匹配后续有 -small，对应 540p（16:9），  
+原始流为 rtmp://play.com/live/stream 配置的匹配后续有 -small，对应转码模板 540p（16:9），  
 则转码流请求分别为  
 rtmp://play.com/live/stream-small  
 http://play.com/live/stream-small.flv  
