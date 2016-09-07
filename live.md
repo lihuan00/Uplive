@@ -44,27 +44,11 @@
 
 域名绑定仅支持已备案成功的自定义域名进行绑定，如果该域名未备案成功，则不能通过域名绑定审核。
 审核结果会控制台和邮件两种方式进行通知，正常审核时间为一个工作日。
-以下是关于域名绑定的一些重要说明（同文件加速）。
 
-除常规形式的域名外（包括顶级域名），我们还支持泛域名绑定，比如 *.yourdomain.com；特别地，其中 * 最多支持匹配 4 层：
+添加域名绑定，如果是又拍云源，需要绑定推流域名和播放域名，如果是自主源站，则只需要绑定播放域名。绑定完成后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
 
-```
-[v] *.yourdomain.com => foo.yourdomain.com
-[v] *.yourdomain.com => bar.yourdomain.com
-[v] *.yourdomain.com => foo.bar.yourdomain.com
-[v] *.yourdomain.com => foo.bar.baz.yourdomain.com
-[v] *.yourdomain.com => foo.bar.baz.qux.yourdomain.com
-[x] *.yourdomain.com => foo.bar.baz.qux.quxx.yourdomain.com
-
-[v] *.bar.yourdomain.com => foo.bar.yourdomain.com
-[v] *.bar.yourdomain.com => baz.foo.bar.yourdomain.com
-[x] *.bar.yourdomain.com => foo.bar.baz.yourdomain.com
-```
-
-添加域名绑定后，需要到域名服务商的 DNS 解析管理中，将推流域名的 CNAME 解析到 `<bucket>.s1.aicdn.com`，将播放域名的 CNAME 解析到 `<bucket>.s0.aicdn.com`。
-
-> 当业务模式为又拍云源时，用户需要将其推流域名和播放域名分别 CNAME 到对应的又拍云内部域名。  
-> 推流 CNAME 域名为 `<bucket>.s1.aicdn.com`，播放 CNAME 域名为 `<bucket>.s0.aicdn.com`。  
+> 当业务模式为又拍云源时，用户需要将其推流域名和播放域名分别 CNAME 到对应的又拍云内部域名。推流 CNAME 域名为 `<bucket>.s1.aicdn.com`，播放 CNAME 域名为 `<bucket>.s0.aicdn.com`。  
+> 当业务模式为自主源站时，只需将播放域名 CNAME 至 `<bucket>.s0.aicdn.com`。
 > 注：`<>` 内的 bucket 需要替换成对应的服务名，下同。
 
 > 当业务模式为自主源站时，用户只需要将其播放域名 CNAME 到对应的又拍云内部播放域名 `<bucket>.s0.aicdn.com`。    
