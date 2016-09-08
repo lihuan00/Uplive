@@ -140,7 +140,7 @@ token = MD5(domain/live/stream + expired_ts + secret)
 > 录制方式：触发或定时录制    
 
 录播的主要作用是将推流内容录制成文件，最终用于点播。
-现支持录制成 MP4、FLV、TS、M3u8，默认录制成 mp4  格式文件，上传到又拍云存储，客户可以自定义上传到哪个存储服务（暂不支持，接口未开放，现在是默认云存储为 live-recorder）。
+现支持录制成 MP4、FLV、TS、M3u8，默认录制成 mp4  格式文件，上传到又拍云存储，客户可以自定义上传到哪个存储服务（暂不支持，接口未开放，现在是默认云存储为 upyun-live-recorder）。
 
 又拍录制系统会自动将录制下来的内容上传到又拍云存储后，可以根据云存储获取目录文件列表 来获取相关录制文件列表。
 如果对录制文件格式有其他要求，可在又拍云处理中心对其进行相关处理，比如格式处理，视频拼接，详细请见[云处理文档](http://docs.upyun.com/cloud/)。
@@ -150,7 +150,9 @@ token = MD5(domain/live/stream + expired_ts + secret)
 ```
 upyun-live-recorder.b0.upaiyun.com/play.com/live/stream/recorder20160604163702.mp4  
 
-其中 upyun-live-recorder 为存储空间， upyun-live-recorder.b0.upaiyun.com 为录制文件播放域名（默认），play.com 为直播拉流  域名，live 为接入点，stream 为流名，recorder 系统默认标识符名，  20160604163702为录制完成时间，mp4 为文件类型。录制完成后可以通过 post 方  式回调给用户提供的回调地址。
+其中 upyun-live-recorder 为存储空间， upyun-live-recorder.b0.upaiyun.com 为录制文件默认播放域名,  
+play.com 为直播拉流  域名，live 为接入点，stream 为流名，recorder 系统默认标识符名，  
+20160604163702为录制完成时间，mp4 为文件类型。录制完成后可以通过 post 方式回调给用户提供的回调地址。  
 
 ```
 录制系统会将录制文件默认保存在该空间以这条流 URL 为路径的目录下，  
